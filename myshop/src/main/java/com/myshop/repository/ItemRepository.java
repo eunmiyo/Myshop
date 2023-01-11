@@ -66,7 +66,7 @@ public interface ItemRepository extends JpaRepository<Item, Long>{
 	List<Item> findByItemDetailByNative(@Param("itemDetail") String itemDetail);
 	
 	/*
-	//퀴 즈
+	//퀴 즈2
 	//(?1) or (:price)
 	//@Query("select i from Item i where i.price >= ?1")
 	//List<Item> findByPriceGreaterThanEqual(Integer price);
@@ -79,5 +79,9 @@ public interface ItemRepository extends JpaRepository<Item, Long>{
 
 	@Query("select i from Item i where i.itemNm = :itemNm and i.itemSellStatus = :sell")
 	List<Item> getItemNmAndItemSellStatus(@Param("itemNm") String itemNm, @Param("sell") ItemSellStatus sell);
+	
+	// 네이티브쿼리에서는 @Query 에서 :#{#sell,name()}로 적용
+	//@Query("select i from Item i where i.itemNm = :itemNm and i.itemSellStatus = :#{#sell,name()}, nativeQuery = true ")
+	//List<Item> getItemNmAndItemSellStatusByNative(@Param("itemNm") String itemNm, @Param("sell") ItemSellStatus sell);
 	*/
 }
