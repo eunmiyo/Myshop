@@ -32,9 +32,23 @@ public class MemberController {
 	
 	//Post방식, 회원가입 버튼을 눌렀을 떄 실행되는 메소드
 	@PostMapping(value = "/new")
+	//@Valid: 유효성을 검증하려고 하는 객체 앞에 붙여줌!
+	//BindingResult: 유효성 검증 후에 결과를 넣어준다.
 	public String memberForm(@Valid MemberFormDto memberFormDto, BindingResult bindingResult, Model model) {
-		Member member = Member.createMember(memberFormDto, passwordEncoder);
-		memberService.saveMember(member);
+		
+		//에러가 있다면 회원가입 페이지로 이동
+		if(bindingResult.hasErrors()) {
+			return "member/memberForm";
+		}
+		
+		try {
+			Member member = Member.createMember(memberFormDto, passwordEncoder);
+			memberService.saveMember(member);
+			
+		} catch(IllegalStateException e) {
+			model.addAttribute("errorMessage", e.getMessage());
+			return "member/memberForm";
+		}	
 		
 		return "redirect:/"; // /-> localhost
 	}
