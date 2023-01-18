@@ -17,7 +17,7 @@ public class Cart {
 	
 	//일대일 단방향 매핑 (Cart가 Member를 참조한다)
 	//자식테이블(자식엔티티)에 적어주면됨
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="member_id")
 	private Member member;
 	
