@@ -1,7 +1,5 @@
 package com.myshop.entity;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.*;
 
 import com.myshop.constant.ItemSellStatus;
@@ -13,7 +11,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class Item { //컬럼
+public class Item extends BaseEntity { //컬럼
 	//not null이 아닐때는 필드 타입을 객체(예 int -> Integer)로 지정해야 한다.
 	
 	@Id
@@ -37,7 +35,4 @@ public class Item { //컬럼
 	@Enumerated(EnumType.STRING) //enum타입 매핑
 	private ItemSellStatus itemSellStatus; //상품 판매상태
 	
-	private LocalDateTime regTime; //등록 시간
-	
-	private LocalDateTime updateTime; //수정 시간
 }

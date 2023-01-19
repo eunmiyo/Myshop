@@ -67,7 +67,7 @@ class ItemRepositoryTest {
 		item.setItemSellStatus(ItemSellStatus.SELL);
 		item.setStockNumber(100);
 		item.setRegTime(LocalDateTime.now());
-		item.setUpdateTime(LocalDateTime.now());
+//		item.setUpdateTime(LocalDateTime.now());
 		Item savedItem = itemRepository.save(item);
 		}
 	}
@@ -81,7 +81,7 @@ class ItemRepositoryTest {
 		item.setItemSellStatus(ItemSellStatus.SELL);
 		item.setStockNumber(100);
 		item.setRegTime(LocalDateTime.now());
-		item.setUpdateTime(LocalDateTime.now());
+//		item.setUpdateTime(LocalDateTime.now());
 		Item savedItem = itemRepository.save(item);
 		}
 		
@@ -93,7 +93,7 @@ class ItemRepositoryTest {
 			item.setItemSellStatus(ItemSellStatus.SOLD_OUT);
 			item.setStockNumber(0);
 			item.setRegTime(LocalDateTime.now());
-			item.setUpdateTime(LocalDateTime.now());
+//			item.setUpdateTime(LocalDateTime.now());
 			Item savedItem = itemRepository.save(item);
 			}
 	}
