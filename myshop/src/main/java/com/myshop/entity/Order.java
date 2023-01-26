@@ -35,4 +35,34 @@ public class Order {
 	//cascade = CascadeType.ALL: 고객이 주문할 상품을 선택하고 주문할 때 주문 엔티티를 저장하면서 주문 상품 엔티티도 함께 저장
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY) //OrderItem에 있는 order에 의해 관리가 된다.
 	private List<OrderItem> orderItems = new ArrayList<>();
+	
+	public void addOrderItem(OrderItem orderItem) {
+		orderItems.add(orderItem);
+		orderItem.setOrder(this); //양방향 참조관계 일때는 orderItem객체에도 order객체를 세팅한다.
+	}
+	
+	//order 객체를 생성해 준다.
+	public static Order createOrder(Member member, List<OrderItem> orderItemList) {
+		Order order = new Order();
+		order.setMember(member);
+		
+		for(OrderItem orderItem : orderItemList) {
+			order.addOrderItem(orderItem);
+		}
+		
+		order.setOrderStatus(OrderStatus.ORDER);
+		order.setOrderDate(LocalDateTime.now());
+		
+		return order;
+	}
+	
+	//총 주문금액
+	public int getTotalPrice() {
+		int totalPrice = 0;
+		for(OrderItem orderItem : orderItems) {
+			totalPrice += orderItem.getTotalPrice();
+		}
+		
+		return totalPrice;
+	}
 }
